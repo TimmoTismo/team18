@@ -105,6 +105,8 @@ class Summative:
 
 
     def FinalResult(self):
+
+        # Comment from Jake: this should only say correct after certain date , and should also actually save the answers somehwere in a text file from current user
         score = "Score: " + str(self.right) + " out of  " + str(len(question))
         tkinter.messagebox.showinfo("Final Result", score)
         root.destroy()
