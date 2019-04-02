@@ -1,5 +1,7 @@
 from tkinter import *
 
+currentuser=open("CurrentUser.txt","r")
+User=currentuser.readlines()
 
 class EditQ(Frame):
 	# GUI Setup

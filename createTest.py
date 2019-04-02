@@ -2,6 +2,11 @@ from tkinter import *
 import tkinter.messagebox as tkm
 import csv
 
+
+currentuser=open("CurrentUser.txt","r")
+User=currentuser.readlines()
+
+
 class createTest(Frame):
 
 	def window(self):

@@ -1,6 +1,7 @@
 from tkinter import * #relevant imports to python
 import os
 import tkinter.messagebox
+import getpass
 
 class LoginFrame(Frame):
     def __init__(self, master): #tkinter initialisation
@@ -48,6 +49,10 @@ class LoginFrame(Frame):
         if real==1 :#checks variable - so if the details were found this would be true
             root.destroy() #closes login
             tkinter.messagebox.showinfo("Login Box", "Welcome " + User) #shows welcome message and concenates with the username that has been entered
+            open('CurrentUser.txt','w').close() #clears the current user file
+            currentfile=open("CurrentUser.txt","a") #opens the file again with appened privalage
+            currentfile.write(User) #writes the user currently logged in to file
+            currentfile.close#closes file
             exec(open(r"Student.py").read())# This opens the menu for student
         else:
             tkinter.messagebox.showerror("Login Failed", "Check your username or password, as our system does not recognise these login details.Please also check you clicked the correct login")    
@@ -68,6 +73,10 @@ class LoginFrame(Frame):
         if real==1 :#checks variable - so if the details were found this would be true
             root.destroy() #closes login
             tkinter.messagebox.showinfo("Login Box", "Welcome " + User) #shows welcome message and concenates with the username that has been entered
+            open('CurrentUser.txt','w').close() #clears the current user file
+            currentfile=open("CurrentUser.txt","a") #opens the file again with appened privalage
+            currentfile.write(User) #writes the user currently logged in to file
+            currentfile.close#closes file
             exec(open(r"Lecturer.py").read()) #This opens the menu file
         else:
             tkinter.messagebox.showerror("Login Failed", "Check your username or password, as our system does not recognise these login details. Please also check you clicked the correct login")    

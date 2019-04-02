@@ -1,4 +1,6 @@
 from tkinter import *
+currentuser=open("CurrentUser.txt","r")
+User=currentuser.readlines()
 
 class Page(Frame):
     def __init__(self, *args, **kwargs):

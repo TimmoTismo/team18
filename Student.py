@@ -1,11 +1,14 @@
 from tkinter import *
 
+currentuser=open("CurrentUser.txt","r")
+User=currentuser.readlines()
 
 class Formative(Frame):
 	# GUI Setup
 	def __init__(self, master):
 		Frame.__init__(self, master)
 		self.grid()
+		
 
 class Summative(Frame):
 	# GUI Setup
