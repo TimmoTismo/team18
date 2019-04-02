@@ -47,12 +47,13 @@ class LoginFrame(Frame):
                     real=1 #the variable real is set to 1 - i.e set to true as it is declared as false above
 
         if real==1 :#checks variable - so if the details were found this would be true
-            root.destroy() #closes login
+            
             tkinter.messagebox.showinfo("Login Box", "Welcome " + User) #shows welcome message and concenates with the username that has been entered
             open('CurrentUser.txt','w').close() #clears the current user file
             currentfile=open("CurrentUser.txt","a") #opens the file again with appened privalage
             currentfile.write(User) #writes the user currently logged in to file
             currentfile.close#closes file
+            root.destroy() #closes login
             exec(open(r"Student.py").read())# This opens the menu for student
         else:
             tkinter.messagebox.showerror("Login Failed", "Check your username or password, as our system does not recognise these login details.Please also check you clicked the correct login")    
@@ -71,13 +72,14 @@ class LoginFrame(Frame):
                     real=1 #the variable real is set to 1 - i.e set to true as it is declared as false above
 
         if real==1 :#checks variable - so if the details were found this would be true
-            root.destroy() #closes login
+            
             tkinter.messagebox.showinfo("Login Box", "Welcome " + User) #shows welcome message and concenates with the username that has been entered
             open('CurrentUser.txt','w').close() #clears the current user file
             currentfile=open("CurrentUser.txt","a") #opens the file again with appened privalage
             currentfile.write(User) #writes the user currently logged in to file
             currentfile.close#closes file
             exec(open(r"Lecturer.py").read()) #This opens the menu file
+            root.destroy() #closes login
         else:
             tkinter.messagebox.showerror("Login Failed", "Check your username or password, as our system does not recognise these login details. Please also check you clicked the correct login")    
             #if not correct user details, error message shows and returns to login page
