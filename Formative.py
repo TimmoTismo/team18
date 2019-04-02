@@ -60,9 +60,9 @@ class Formative:
 
 
     def Exit(self):
-         root.destroy()
-        # exec(open(r"XXXXXXXXXXXXXXXXXXX.py").read())  replace XXXXXXXX with student menu link
-
+        tkinter.messagebox.showinfo("Exit","Formative test attempt exited. Returning to Main Menu")
+        root.destroy()
+        exec(open(r"Student.py").read()) #return to menu
 
     def Check(self):
         if self.answer(self.questionnumber):
@@ -82,8 +82,7 @@ class Formative:
         tkinter.messagebox.showinfo("Final Result", score)
         root.destroy()
         #show correct answers???       
-        # exec(open(r"XXXXXXXXXXXXXXXXXXX.py").read())  replace XXXXXXXX with student menu link
-
+        exec(open(r"Student.py").read())#goes back to menu
 
 root = Tk()
 root.title("Java Theory Test")
