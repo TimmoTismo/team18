@@ -37,7 +37,7 @@ class Assessment(Frame):
 	def createButtons(self):
 
 		butFormative = Button(self, text='Formative',font=('Helvetica', 8))
-		butFormative['command']=self.formativeAssessment #Note: no () after the method
+		butFormative['command']=exec(open(r"Formative.py").read()) #Note: no () after the method
 		butFormative.grid(row=14, column=2, columnspan=2, padx=10, pady=10)
 
 		butSummative = Button(self, text='Summative',font=('Helvetica', 8))

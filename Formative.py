@@ -1,16 +1,31 @@
 from tkinter import *
 import tkinter.messagebox
+import csv 
 
 #change so reads in from a .txt or .csv file,
 #instead of being hard coded in????
 
-Answers=[1,2,4,]
-question = ["What is Java?", "What type of language is Java?","What is an algorithm"]
+Answers=[]
+question = []
+options = [[], [], [], [], [], [], [], [], [], []]
 
+with open('Formative.csv', 'r') as csv_file:
+    csvquestions = csv.reader(csv_file, delimiter=',')
+    line_count = 0
+    for row in csvquestions:
+        if line_count < 10:
+            question.append(row[0])
+            options[line_count].append(row[1])
+            options[line_count].append(row[2])
+            options[line_count].append(row[3])
+            options[line_count].append(row[4])
+            line_count += 1
+        elif line_count == 10:
+            for ans in row:
+                Answers.append(int(ans))
+                print(Answers)
+            line_count += 1
 
-options = [["Programming Language", "Hot drink", "Type of Computer", "Logical Thinking Theory"], ["Procedural", "Object-Orientated", "Assembly", "User-Driven"],
-    ["Some code", "A mathmetical proven equation /theory", "A finite set of instructions that complete a set task and must have an input and output", "None of these"]]
-    #add more questions and answer
 class Formative:
     def __init__(self, master):
         self.questionnumber = 0
