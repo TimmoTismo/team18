@@ -1,7 +1,7 @@
 from tkinter import *
 
 currentuser=open("CurrentUser.txt","r")
-User=currentuser.readlines()
+User=currentuser.readlines() #tracks the current user in session
 
 class Formative(Frame):
 	# GUI Setup

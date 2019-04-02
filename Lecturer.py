@@ -1,7 +1,7 @@
 from tkinter import *
 
 currentuser=open("CurrentUser.txt","r")
-User=currentuser.readlines()
+User=currentuser.readlines() #tracks current user in session
 
 class EditQ(Frame):
 	# GUI Setup
