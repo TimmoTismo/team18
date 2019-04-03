@@ -11,20 +11,32 @@ User=currentuser.readlines()
 class createTest(Frame):
 
 	def saveTest(self):
-		index = self.listTest.curselection()[0]
-		testType = str(self.listTest.get(index))
 		strMsg = ""
-
 		testTitle = str(self.TitleEntry.get())
+
+
+		try:
+			index = self.listTest.curselection()[0]
+			testType = str(self.listTest.get(index))
+		except:
+			strMsg = strMsg + "\nAssessment type not selected. Choose Formative or Summative."
+
+
 		if testTitle == "":
-			strMsg = strMsg + "Title can not be left blank"
+			strMsg = strMsg + "\nTitle can not be left blank."
 
 		try:
 			intDay = int(self.entDay.get())
 			intMonth = int(self.entMonth.get())
 			intYear = int(self.entYear.get())
+			date = datetime.date(intYear, intMonth, intDay)
+
+			if date <= datetime.datetime.today().date():
+				strMsg = strMsg + "\nInvalid date."
+
 		except:
-			strMsg = strMsg + "Invalid date"
+			strMsg = strMsg + "\nInvalid date."
+
 
 
 		if strMsg == "":
@@ -44,14 +56,24 @@ class createTest(Frame):
 
 			    test_writer.writerow([self.varQ1.get(), self.varQ2.get(), self.varQ3.get(),self.varQ4.get(),self.varQ5.get(),self.varQ6.get(),self.varQ7.get(), self.varQ8.get(), self.varQ9.get(), self.varQ10.get()])
 			    test_writer.writerow([testTitle])
-			    test_writer.writerow([self.testType.get()])
+			    test_writer.writerow([testType])
 			    test_writer.writerow([intDay,intMonth, intYear])
 
 			f.close()
 
-			with open(testTitle +'Attempts.csv', mode='w', newline="") as f:
+			with open('AssessmentList.csv', mode='a') as f:
+				test_writer = csv.writer(f)
 
+				test_writer.writerow([testTitle, testTitle + ".csv", testType])
 			f.close()
+    		#Appends the assessment to end of the list
+
+			if testType == "Summative":
+				f= open(testTitle + "_Attempts.txt","w+")
+				f.close()
+
+			tkMessageBox.showinfo("Assessment", "Assessment Added")
+
 
 		else:
 			tkMessageBox.showwarning("Entry Error", strMsg)
@@ -488,27 +510,27 @@ class createTest(Frame):
 	def createButtons(self):
 		butSave = Button(self, text='Save',font=('MS', 8,'bold'))
 		butSave['command']=self.saveTest #Note: no () after the method
-		butSave.grid(row=0, column=16, padx=5)
+		butSave.grid(row=0, column=14, padx=5)
 
 		butCancel = Button(self, text='Cancel',font=('MS', 8,'bold'))
 		butCancel['command']=self.goBack #Note: no () after the method
-		butCancel.grid(row=0, column=17, columnspan=2)
+		butCancel.grid(row=0, column=15, columnspan=2)
 
 	def createDueDate(self):
 		lblDate = Label(self, text = "Due Date:", font=('MS', 8,'bold'))
 		lblDate.grid(row = 2, column = 13, pady = 5)
 
-		lblDay = Label(self, text = "Day:", font=('MS', 8,'bold'))
+		lblDay = Label(self, text = "Day: (dd)", font=('MS', 8,'bold'))
 		lblDay.grid(row = 3, column = 13, pady = 5)
 		self.entDay = Entry(self, width=5)
 		self.entDay.grid(row=3,column=14,columnspan=4, padx=5)
 
-		lblMonth = Label(self, text = "Month:", font=('MS', 8,'bold'))
+		lblMonth = Label(self, text = "Month: (mm)", font=('MS', 8,'bold'))
 		lblMonth.grid(row = 4, column = 13, pady = 5)	
 		self.entMonth = Entry(self, width=5)
 		self.entMonth.grid(row=4,column=14,columnspan=4, padx=5)
 
-		lblYear = Label(self, text = "Year:", font=('MS', 8,'bold'))
+		lblYear = Label(self, text = "Year: (yyyy)", font=('MS', 8,'bold'))
 		lblYear.grid(row = 5, column = 13, pady = 5)	
 		self.entYear = Entry(self, width=5)
 		self.entYear.grid(row=5,column=14,columnspan=4, padx=5)
