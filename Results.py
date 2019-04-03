@@ -6,13 +6,13 @@ import csv
 
 class Results(Frame):
 	def __init__(self,master, student_score):
-        Frame.__init__(self,master)
-        self.grid()
-        self.newPage(student_score)
+		Frame.__init__(self,master)
+		self.grid()
+		self.newPage(student_score)
 
-    def newPage(self, student_score):
-    	Label(self, width="10", height="2").grid(row=0, column=0)
-    	Label(self, text="Student Results", font=('Helvetica', 8)).grid(row=2, column=0)
+		def newPage(self, student_score):
+			Label(self, width="10", height="2").grid(row=0, column=0)
+			Label(self, text="Student Results", font=('Helvetica', 8)).grid(row=2, column=0)
 
 
 root = Tk()
