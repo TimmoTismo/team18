@@ -3,11 +3,11 @@ from tkinter import *
     
 class Summative(Frame):
     def __init__(self, master):
-        import tkinter.messagebox
+        import tkinter.messagebox #imports
         import csv
         Answers=[]
         question = []
-        options = [[], [], [], [], [], [], [], [], [], []]
+        options = [[], [], [], [], [], [], [], [], [], []] #empty lists
 
         with open('summative.csv', 'r') as csv_file:
             _data = csv.reader(csv_file, delimiter=',')
@@ -22,7 +22,7 @@ class Summative(Frame):
                     line_count += 1
                 elif line_count == 10:
                     for dts in row:
-                        Answers.append(int(dts))
+                        Answers.append(int(dts)) #reads from csv
                     line_count += 1
 
         self.questionNo = 0
@@ -33,11 +33,11 @@ class Summative(Frame):
         self.right = 0
         self.questions = self.PrintQuestion(master, self.questionNo,self.question) 
         self.option = self.radios(master,4)
-        button = Button(master, text="Save Answer", command=self.Check)
+        button = Button(master, text="Save Answer", command=self.Check) #runs save answer function
         button.pack(side=BOTTOM)        
-        button = Button(master, text="Previous Question", command=self.Previous)
+        button = Button(master, text="Previous Question", command=self.Previous) #back question
         button.pack(side=LEFT)
-        button = Button(master, text="Next Question", command=self.Next)
+        button = Button(master, text="Next Question", command=self.Next) #goes to next question
         button.pack(side=RIGHT)
         self.ShowQuestion(self.questionNo,self.question,self.options)
         self.instantresult= Label(master, text='')
@@ -45,7 +45,7 @@ class Summative(Frame):
 
     def PrintQuestion(self, master, questionNo,question):
         Question = Label(master, text=question[questionNo])
-        Question.pack(side=TOP)
+        Question.pack(side=TOP) #loads relevant question
         return Question
 
 
@@ -57,7 +57,7 @@ class Summative(Frame):
             buttons.append(Buttonn)
             Buttonn.pack(side=TOP, anchor="w")
             answer = answer + 1
-        return buttons
+        return buttons #prints out all the potential radio buttons
 
 
     def ShowQuestion(self, questionNo,question,options):
@@ -70,7 +70,7 @@ class Summative(Frame):
 
 
     def answer(self, questionNo):
-        if self.selected.get() == Answers[questionNo]:
+        if self.selected.get() == Answers[questionNo]: #sets true or false depending if the answer correct or not
             return True
         return False
 
@@ -78,7 +78,7 @@ class Summative(Frame):
         if self.questionNo > 0:
             self.instantresult['text'] = ""
             self.questionNo = self.questionNo - 1;
-            self.ShowQuestion(self.questionNo)
+            self.ShowQuestion(self.questionNo) #goes to last question by taking one off the current question number
            
 
     def Next(self):
@@ -87,7 +87,7 @@ class Summative(Frame):
         elif self.questionNo < 9:
             self.instantresult['text'] = ""
             self.questionNo = self.questionNo + 1;
-            self.ShowQuestion(self.questionNo,self.question,self.options)
+            self.ShowQuestion(self.questionNo,self.question,self.options) #next question button that adds one to the question number
         
             
         
@@ -97,6 +97,9 @@ class Summative(Frame):
             self.right += 1
         else:
             self.instantresult['text'] = "Answer saved"
+
+            #saving answer function, if more time this would have saved to a csv file each answer against the user and then this would be used for the statisitcs 
+            #and feedback.
         
         
         
@@ -104,21 +107,17 @@ class Summative(Frame):
 
     def FinalResult(self,question,tkinter):
 
-        # Comment from Jake: this should only say correct after certain date , and should also actually save the answers somehwere in a text file from current user
-        #created a current user .txt file which can be used to define the user and help save this
-        #or else currently the score is not saved and test can be retaken(needs to check this here or at actual menu level removing button)
         score = "Score: " + str(self.right) + " out of  " + str(len(question))
-        tkinter.messagebox.showinfo("Final Result", score)
+        tkinter.messagebox.showinfo("Final Result", score)#shows the user the score they achieved.
         currentuser=open("CurrentUser.txt","r")
         User=str(currentuser.readlines())#tracks the current user in session
-        studentfile=open("takentest.txt","a")
-        studentfile.write("\n"+User)
-       # root.destroy()
-        exec(open(r"Student.py").read())
+        studentfile=open("takentest.txt","a") #writes that the current user has taken the test to the file.
+        studentfile.write("\n"+User)#this would have been used to make sure the user only had one attempt if more time
+        exec(open(r"Student.py").read()) #returns to menu
         
 
-
-root = Tk()
+ 
+root = Tk() #tkinter formatting
 
 root.resizable(0,0) 
 root.geometry("600x200")
