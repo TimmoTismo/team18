@@ -1,6 +1,5 @@
 from tkinter import *
-currentuser=open("CurrentUser.txt","r")
-User=currentuser.readlines() #tracks the current user in session
+
     
 class Summative(Frame):
     def __init__(self, master):
@@ -115,6 +114,10 @@ class Summative(Frame):
         #or else currently the score is not saved and test can be retaken(needs to check this here or at actual menu level removing button)
         score = "Score: " + str(self.right) + " out of  " + str(len(question))
         tkinter.messagebox.showinfo("Final Result", score)
+        currentuser=open("CurrentUser.txt","r")
+        User=str(currentuser.readlines())#tracks the current user in session
+        studentfile=open("takentest.txt","a")
+        studentfile.write("\n"+User)
        # root.destroy()
         exec(open(r"Student.py").read())
         
