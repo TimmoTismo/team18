@@ -79,7 +79,7 @@ class Summative(Frame):
         if self.questionNo > 0:
             self.instantresult['text'] = ""
             self.questionNo = self.questionNo - 1;
-            self.ShowQuestion(self.questionNo) #goes to last question by taking one off the current question number
+            self.ShowQuestion(self.questionNo,self.question,self.options) #goes to last question by taking one off the current question number
            
 
     def Next(self):
