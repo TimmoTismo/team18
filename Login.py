@@ -1,7 +1,6 @@
 from tkinter import * #relevant imports to python
 import os
 import tkinter.messagebox
-import getpass
 
 class LoginFrame(Frame):
     def __init__(self, master): #tkinter initialisation
@@ -26,13 +25,24 @@ class LoginFrame(Frame):
     def register(self):
         Username = self.usernameInput.get()# username from form
         Password = self.passwordInput.get()# password from form
+        Taken=0 #declare
 
-        studentfile=open("StudentAccount.txt","a")# opens student account file, with append 
-        studentfile.write("\n"+ Username + " " + Password) #writes to the file new line the username and password, seperated by a space so the login process will work
-        tkinter.messagebox.showinfo("Register Sucess", "You have been registered and may now login " + Username +".")#message saying registered
-        self.RegisterButton.grid_remove() #removes the register button once user has been registered, the fields are now still filled so can just click to login
-        #does allow for multiple registration but the login process means this doesnt matter as the real will still be set to 1 , just potentilly multiple times.
+        with open("StudentAccount.txt","r") as studentfile: #checks if username taken already
+            for line in studentfile:
+                line = line.split()
+                if Username == line[0]:
+                    Taken=1
 
+
+        if Taken == 1 :
+            tkinter.messagebox.showerror("Error","Username Taken") #if already taken error
+
+        elif Taken ==0:
+            studentfile=open("StudentAccount.txt","a")# opens student account file, with append 
+            studentfile.write("\n"+ Username + " " + Password) #writes to the file new line the username and password, seperated by a space so the login process will work
+            tkinter.messagebox.showinfo("Register Sucess", "You have been registered and may now login " + Username +".")#message saying registered
+            self.RegisterButton.grid_remove() #removes the register button once user has been registered, the fields are now still filled so can just click to login
+            #does allow for multiple registration but the login process means this doesnt matter as the real will still be set to 1 , just potentilly multiple times.
     
     def studentclicked(self): #checks if the student login is correct
         User = self.usernameInput.get()# takes the username from the form
