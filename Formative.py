@@ -68,6 +68,7 @@ class Formative(Frame):
 
     def answer(self, questionnumber,Answers,question):
         if self.selected.get() == Answers[questionnumber]: #if the selected button is equal to the answer for that question number
+
             return True
         return False
 
@@ -90,6 +91,13 @@ class Formative(Frame):
 
 
     def FinalResult(self,question,tkinter):
+        currentuser=open("CurrentUser.txt","r")
+        User=str(currentuser.readlines())
+        currentmarks=open("FormativeResults.txt","a")
+        fmarks=str(self.right)
+        printstatement=User + fmarks
+        currentmarks.write(printstatement+ "\n")  # saves the mark the user got and the users name 
+        currentmarks.close()
         score = "Score: " + str(self.right) + " out of a total of "+ str(len(question)) +" .To retake the test, login to the system again. Please close the test window" #message with total score - using the right from the Check function and length of all the questions
         tkinter.messagebox.showinfo("Final Result", score) #prints the message created above
         #root.destroy()#closes window

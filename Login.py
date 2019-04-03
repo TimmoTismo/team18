@@ -62,7 +62,7 @@ class LoginFrame(Frame):
             open('CurrentUser.txt','w').close() #clears the current user file
             currentfile=open("CurrentUser.txt","a") #opens the file again with appened privalage
             currentfile.write(User) #writes the user currently logged in to file
-            currentfile.close#closes file
+            currentfile.close()#closes file
            # root.destroy() #closes login
             exec(open(r"Student.py").read())# This opens the menu for student
         else:
@@ -87,9 +87,9 @@ class LoginFrame(Frame):
             open('CurrentUser.txt','w').close() #clears the current user file
             currentfile=open("CurrentUser.txt","a") #opens the file again with appened privalage
             currentfile.write(User) #writes the user currently logged in to file
-            currentfile.close#closes file
+            currentfile.close()#closes file
             exec(open(r"Lecturer.py").read()) #This opens the menu file
-           # root.destroy() #closes login
+            #root.destroy() #closes login
         else:
             tkinter.messagebox.showerror("Login Failed", "Check your username or password, as our system does not recognise these login details. Please also check you clicked the correct login")    
             #if not correct user details, error message shows and returns to login page
