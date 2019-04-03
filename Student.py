@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter.messagebox
 
 currentuser=open("CurrentUser.txt","r")
 User=currentuser.readlines() #tracks the current user in session
@@ -37,11 +38,11 @@ class Assessment(Frame):
 	def createButtons(self):
 
 		butFormative = Button(self, text='Formative',font=('Helvetica', 8))
-		butFormative['command']=exec(open(r"Formative.py").read()) #Note: no () after the method
+		butFormative['command']=self.formativeclickself.questions = self.PrintQuestion(master, self.questionnumber, self.question) #Note: no () after the method
 		butFormative.grid(row=14, column=2, columnspan=2, padx=10, pady=10)
 
 		butSummative = Button(self, text='Summative',font=('Helvetica', 8))
-		butSummative['command']=self.summativeAssessment #Note: no () after the method
+		butSummative['command']=self.summativeclick #Note: no () after the method
 		butSummative.grid(row=12, column=2, columnspan=2, padx=10, pady=10)
 
 
@@ -91,11 +92,11 @@ class Student(Frame):
 		"""
 
 		butFormative = Button(self, text='Formative',font=('Helvetica', 8))
-		butFormative['command']=self.formativeAssessment #Note: no () after the method
+		butFormative['command']=self.formativeclick #Note: no () after the method
 		butFormative.grid(row=12, column=2, columnspan=2, padx=10, pady=10)
 
 		butSummative = Button(self, text='Summative',font=('Helvetica', 8))
-		butSummative['command']=self.summativeAssessment #Note: no () after the method
+		butSummative['command']=self.summativeclick #Note: no () after the method
 		butSummative.grid(row=10, column=2, columnspan=2, padx=10, pady=10)
 
 		butViewFeedback = Button(self, text='View Feedback',font=('Helvetica', 8))
@@ -109,6 +110,14 @@ class Student(Frame):
 		self.grid()
 		self.createButtons()
 
+	def summativeclick(self):
+		exec(open(r"Summative.py").read())
+
+	def formativeclick(self):
+		root.destroy()
+		exec(open(r"Formative.py").read())
+
+		#root.destroy()
 # Main
 root = Tk()
 root.title("Student Menu")
