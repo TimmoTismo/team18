@@ -1,30 +1,29 @@
 from tkinter import *
 import tkinter.messagebox
 import csv
-
-Answers=[]
-question = []
-options = [[], [], [], [], [], [], [], [], [], []]
-
-with open('summative.csv', 'r') as csv_file:
-    _data = csv.reader(csv_file, delimiter=',')
-    line_count = 0
-    for row in _data:
-        if line_count < 10:
-            question.append(row[0])
-            options[line_count].append(row[1])
-            options[line_count].append(row[2])
-            options[line_count].append(row[3])
-            options[line_count].append(row[4])
-            line_count += 1
-        elif line_count == 10:
-            for dts in row:
-                Answers.append(int(dts))
-            line_count += 1
-
     
 class Summative:
     def __init__(self, master):
+        Answers=[]
+        question = []
+        options = [[], [], [], [], [], [], [], [], [], []]
+
+        with open('summative.csv', 'r') as csv_file:
+            _data = csv.reader(csv_file, delimiter=',')
+            line_count = 0
+            for row in _data:
+                if line_count < 10:
+                    question.append(row[0])
+                    options[line_count].append(row[1])
+                    options[line_count].append(row[2])
+                    options[line_count].append(row[3])
+                    options[line_count].append(row[4])
+                    line_count += 1
+                elif line_count == 10:
+                    for dts in row:
+                        Answers.append(int(dts))
+                    line_count += 1
+
         self.questionNo = 0
         self.selected = IntVar()
         self.right = 0
