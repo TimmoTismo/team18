@@ -9,6 +9,8 @@ class Formative(Frame):
         question = []
         options = [[], [], [], [], [], [], [], [], [], []] #empty lists to be populated from csv
 
+
+
         with open('Formative.csv', 'r') as csv_file: #opens test csv as read
             csvquestions = csv.reader(csv_file, delimiter=',') #seperated by ,
             line_count = 0 #declares as 0
@@ -100,8 +102,6 @@ class Formative(Frame):
         currentmarks.close()
         score = "Score: " + str(self.right) + " out of a total of "+ str(len(question)) +" .To retake the test, login to the system again. Please close the test window" #message with total score - using the right from the Check function and length of all the questions
         tkinter.messagebox.showinfo("Final Result", score) #prints the message created above
-        #root.destroy()#closes window
-        # GET SO SHOWS CORRECT ANSWER IF CLICK FINAL TRY !!!!!!!!!!!!     
         exec(open(r"Student.py").read())#goes back to menu
 
 root = Tk()
