@@ -33,8 +33,6 @@ class Summative(Frame):
         self.right = 0
         self.questions = self.PrintQuestion(master, self.questionNo,self.question) 
         self.option = self.radios(master,4)
-        button = Button(master, text="Exit", command=self.Exit)
-        button.pack(side=BOTTOM)
         button = Button(master, text="Save Answer", command=self.Check)
         button.pack(side=BOTTOM)        
         button = Button(master, text="Previous Question", command=self.Previous)
@@ -92,9 +90,6 @@ class Summative(Frame):
             self.ShowQuestion(self.questionNo,self.question,self.options)
         
             
-    
-    def Exit(self):
-         root.destroy()
         
     def Check(self):
         if self.answer(self.questionNo):
