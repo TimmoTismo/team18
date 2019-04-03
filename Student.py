@@ -112,12 +112,12 @@ class Student(Frame):
 
 	def summativeclick(self):
 		root.destroy()
-		exec(open(r"Summative.py").read())
+		exec(open(r"Summative.py").read()) #opens Summative
 
 
 	def formativeclick(self):
 		root.destroy()
-		exec(open(r"Formative.py").read())
+		exec(open(r"Formative.py").read()) #Opens Formative
 
 		#root.destroy()
 # Main
