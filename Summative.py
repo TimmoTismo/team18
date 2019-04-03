@@ -1,7 +1,8 @@
 from tkinter import *
-
+currentuser=open("CurrentUser.txt","r")
+User=currentuser.readlines() #tracks the current user in session
     
-class Summative:
+class Summative(Frame):
     def __init__(self, master):
         import tkinter.messagebox
         import csv
