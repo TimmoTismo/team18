@@ -40,7 +40,7 @@ class Statistics(Frame):
 		self.score = opencsv(fileName)
 		self.questionAverage = calcAverage(self.score)
 		self.mostInc = mostIncorrect(self.questionAverage)
-		#opencsv file
+		#needs to import csv fle
 
 	def viewStatistics(self):
 		title = Label(self, text = ("Percentage questions were answered correctly:\n for " + self.assessment), font = ('Helvetica', 8))
@@ -79,12 +79,12 @@ class Statistics(Frame):
 		mostIncAns = Label(self, text = ("Question answered most incorrectly: Question " + str(self.mostInc)), font = ('Helvetica', 8))
 		title.grid(row = 12, column = 0, columnspan = 3)
 
-		root = Tk()
+root = Tk()
 
 root.title("Statistics")
 root.resizable(0,0) 
 root.geometry("200x200") 
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
-app = Lecturer(root)
+#app = Lecturer(root)
 root.mainloop()

@@ -25,13 +25,24 @@ class LoginFrame(Frame):
     def register(self):
         Username = self.usernameInput.get()# username from form
         Password = self.passwordInput.get()# password from form
+        Taken=0 #declare
 
-        studentfile=open("StudentAccount.txt","a")# opens student account file, with append 
-        studentfile.write("\n"+ Username + " " + Password) #writes to the file new line the username and password, seperated by a space so the login process will work
-        tkinter.messagebox.showinfo("Register Sucess", "You have been registered and may now login " + Username +".")#message saying registered
-        self.RegisterButton.grid_remove() #removes the register button once user has been registered, the fields are now still filled so can just click to login
-        #does allow for multiple registration but the login process means this doesnt matter as the real will still be set to 1 , just potentilly multiple times.
+        with open("StudentAccount.txt","r") as studentfile: #checks if username taken already
+            for line in studentfile:
+                line = line.split()
+                if Username == line[0]:
+                    Taken=1
 
+
+        if Taken == 1 :
+            tkinter.messagebox.showerror("Error","Username Taken") #if already taken error
+
+        elif Taken ==0:
+            studentfile=open("StudentAccount.txt","a")# opens student account file, with append 
+            studentfile.write("\n"+ Username + " " + Password) #writes to the file new line the username and password, seperated by a space so the login process will work
+            tkinter.messagebox.showinfo("Register Sucess", "You have been registered and may now login " + Username +".")#message saying registered
+            self.RegisterButton.grid_remove() #removes the register button once user has been registered, the fields are now still filled so can just click to login
+            #does allow for multiple registration but the login process means this doesnt matter as the real will still be set to 1 , just potentilly multiple times.
     
     def studentclicked(self): #checks if the student login is correct
         User = self.usernameInput.get()# takes the username from the form
@@ -46,8 +57,13 @@ class LoginFrame(Frame):
                     real=1 #the variable real is set to 1 - i.e set to true as it is declared as false above
 
         if real==1 :#checks variable - so if the details were found this would be true
-            root.destroy() #closes login
+            
             tkinter.messagebox.showinfo("Login Box", "Welcome " + User) #shows welcome message and concenates with the username that has been entered
+            open('CurrentUser.txt','w').close() #clears the current user file
+            currentfile=open("CurrentUser.txt","a") #opens the file again with appened privalage
+            currentfile.write(User) #writes the user currently logged in to file
+            currentfile.close#closes file
+           # root.destroy() #closes login
             exec(open(r"Student.py").read())# This opens the menu for student
         else:
             tkinter.messagebox.showerror("Login Failed", "Check your username or password, as our system does not recognise these login details.Please also check you clicked the correct login")    
@@ -66,9 +82,14 @@ class LoginFrame(Frame):
                     real=1 #the variable real is set to 1 - i.e set to true as it is declared as false above
 
         if real==1 :#checks variable - so if the details were found this would be true
-            root.destroy() #closes login
+            
             tkinter.messagebox.showinfo("Login Box", "Welcome " + User) #shows welcome message and concenates with the username that has been entered
+            open('CurrentUser.txt','w').close() #clears the current user file
+            currentfile=open("CurrentUser.txt","a") #opens the file again with appened privalage
+            currentfile.write(User) #writes the user currently logged in to file
+            currentfile.close#closes file
             exec(open(r"Lecturer.py").read()) #This opens the menu file
+           # root.destroy() #closes login
         else:
             tkinter.messagebox.showerror("Login Failed", "Check your username or password, as our system does not recognise these login details. Please also check you clicked the correct login")    
             #if not correct user details, error message shows and returns to login page

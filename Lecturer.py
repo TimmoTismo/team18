@@ -1,5 +1,7 @@
 from tkinter import *
 
+currentuser=open("CurrentUser.txt","r")
+User=currentuser.readlines() #tracks current user in session
 
 class EditQ(Frame):
 	# GUI Setup
@@ -91,7 +93,7 @@ class Lecturer(Frame):
 		butAddQ.grid(row=10, column=2, columnspan=2, padx=10, pady=10)
 
 		butviewStatistics = Button(self, text='View Statistics',font=('Helvetica', 8))
-		butviewStatistics['command']=self.viewStatistics #Note: no () after the method
+		#butviewStatistics['command']=exec(open(r"Lecturer.py").read()
 		butviewStatistics.grid(row=14, column=2, columnspan=2, padx=10, pady=10)  
 
 	# GUI Setup
