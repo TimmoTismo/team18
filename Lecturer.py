@@ -95,7 +95,7 @@ class Lecturer(Frame):
 		butviewStatistics = Button(self, text='View Statistics',font=('Helvetica', 8))
 		#butviewStatistics['command']=exec(open(r"Lecturer.py").read()
 		butviewStatistics.grid(row=14, column=2, columnspan=2, padx=10, pady=10)  
-
+		
 	# GUI Setup
 	def __init__(self, master):
 		# Initialise Lecturer Class
