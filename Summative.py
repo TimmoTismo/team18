@@ -8,6 +8,7 @@ class Summative(Frame):
         Answers=[]
         question = []
         options = [[], [], [], [], [], [], [], [], [], []] #empty lists
+        saved_answers = ["","","","","","","","","",""]
 
         with open('summative.csv', 'r') as csv_file:
             _data = csv.reader(csv_file, delimiter=',')
@@ -97,7 +98,8 @@ class Summative(Frame):
             self.right += 1
         else:
             self.instantresult['text'] = "Answer saved"
-
+    saved_answers[self.questionNo] = (self.selected.get()) #Saved students answers to an empty list
+    #print(saved_answers)
             #saving answer function, if more time this would have saved to a csv file each answer against the user and then this would be used for the statisitcs 
             #and feedback.
         
