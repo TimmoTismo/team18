@@ -1,11 +1,11 @@
 from tkinter import *
-import csv
+import csv #would have imported results csv file and then passed this through the functions.
 
 
 def calcAverage(data):	
 	dictionary = []
 	for i in range (len(dictionary)):
-		dictionary.append(list(data[i].items()))
+		dictionary.append(list(data[i].items())) #for each result in file
 
 	result = {}
 	for i in range(3, 3+10):
@@ -19,13 +19,13 @@ def calcAverage(data):
 				elif result[i][1] == '0':
 					score = score + 1
 		result[i-2] = round((right/score * 100), 2)
-	return result
+	return result #creates the average mark for that question
 
 def mostIncorrect(dictionary):
 	average = []
 	for i in dictionary:
 		average.append(dictionary[i])
-	return(average.index(max(average))+1)
+	return(average.index(max(average))+1) #chooses the question with the lowest average
 
 
 
@@ -42,12 +42,12 @@ class Statistics(Frame):
 		self.mostInc = mostIncorrect(self.questionAverage)
 		#needs to import csv fle
 
-	def viewStatistics(self):
+	def viewStatistics(self): #tkinter
 		title = Label(self, text = ("Percentage questions were answered correctly:\n for " + self.assessment), font = ('Helvetica', 8))
 		title.grid(row = 0, column = 0, columnspan = 3)
 
 		question1 = Label(self, text = ("Question 1: " + str(self.questionAverage[1] + "%"), font('Helvetica', 8)))
-		question1.grid(row = 1, column = 0, columnspan = 3)
+		question1.grid(row = 1, column = 0, columnspan = 3) #print out question average with formatting
 
 		question2 = Label(self, text = ("Question 2: " + str(self.questionAverage[2] + "%"), font('Helvetica', 8)))
 		question2.grid(row = 2, column = 0, columnspan = 3)
@@ -77,9 +77,9 @@ class Statistics(Frame):
 		question10.grid(row = 10, column = 0, columnspan = 3)
 
 		mostIncAns = Label(self, text = ("Question answered most incorrectly: Question " + str(self.mostInc)), font = ('Helvetica', 8))
-		title.grid(row = 12, column = 0, columnspan = 3)
+		title.grid(row = 12, column = 0, columnspan = 3) #prints result from incorrect function and formats this
 
-root = Tk()
+root = Tk() #tkinter settings
 
 root.title("Statistics")
 root.resizable(0,0) 
