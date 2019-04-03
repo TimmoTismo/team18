@@ -1,9 +1,10 @@
 from tkinter import *
-import tkinter.messagebox
-import csv
+
     
 class Summative:
     def __init__(self, master):
+        import tkinter.messagebox
+        import csv
         Answers=[]
         question = []
         options = [[], [], [], [], [], [], [], [], [], []]
@@ -26,8 +27,11 @@ class Summative:
 
         self.questionNo = 0
         self.selected = IntVar()
+        self.tkinter=tkinter
+        self.options=options
+        self.question=question
         self.right = 0
-        self.questions = self.PrintQuestion(master, self.questionNo) 
+        self.questions = self.PrintQuestion(master, self.questionNo,self.question) 
         self.option = self.radios(master,4)
         button = Button(master, text="Exit", command=self.Exit)
         button.pack(side=BOTTOM)
@@ -37,11 +41,11 @@ class Summative:
         button.pack(side=LEFT)
         button = Button(master, text="Next Question", command=self.Next)
         button.pack(side=RIGHT)
-        self.ShowQuestion(self.questionNo)
+        self.ShowQuestion(self.questionNo,self.question,self.options)
         self.instantresult= Label(master, text='')
         self.instantresult.pack(side=BOTTOM, fill =X)
 
-    def PrintQuestion(self, master, questionNo):
+    def PrintQuestion(self, master, questionNo,question):
         Question = Label(master, text=question[questionNo])
         Question.pack(side=TOP)
         return Question
@@ -58,7 +62,7 @@ class Summative:
         return buttons
 
 
-    def ShowQuestion(self, questionNo):
+    def ShowQuestion(self, questionNo,question,options):
         answer = 0
         self.selected.set(0)
         self.questions['text'] = question[questionNo]
@@ -81,11 +85,11 @@ class Summative:
 
     def Next(self):
         if self.questionNo > 8:
-            self.FinalResult()
+            self.FinalResult(self.question,self.tkinter)
         elif self.questionNo < 9:
             self.instantresult['text'] = ""
             self.questionNo = self.questionNo + 1;
-            self.ShowQuestion(self.questionNo)
+            self.ShowQuestion(self.questionNo,self.question,self.options)
         
             
     
@@ -103,14 +107,15 @@ class Summative:
         
 
 
-    def FinalResult(self):
+    def FinalResult(self,question,tkinter):
 
         # Comment from Jake: this should only say correct after certain date , and should also actually save the answers somehwere in a text file from current user
         #created a current user .txt file which can be used to define the user and help save this
         #or else currently the score is not saved and test can be retaken(needs to check this here or at actual menu level removing button)
         score = "Score: " + str(self.right) + " out of  " + str(len(question))
         tkinter.messagebox.showinfo("Final Result", score)
-        root.destroy()
+       # root.destroy()
+        exec(open(r"Student.py").read())
         
 
 

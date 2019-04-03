@@ -111,6 +111,7 @@ class Student(Frame):
 		self.createButtons()
 
 	def summativeclick(self):
+		root.destroy()
 		exec(open(r"Summative.py").read())
 
 	def formativeclick(self):
