@@ -3,8 +3,52 @@ import tkinter.messagebox as tkMessageBox
 import csv
 import datetime
 
+class ChooseAssessment:
 
-class createTest(Frame):
+    def __init__(self, root):
+        root.geometry("300x100")
+        root.rowconfigure(0, weight = 1)
+        root.columnconfigure(0, weight = 1)
+        root.title("Edit Test")
+        self.assessmentList = assessmentCSVRead().data
+        self.titleList = [title[0] for title in self.assessmentList[0::6]]
+        self.frame = Frame(root)
+        self.frame.grid()
+        self.testChoice(root)
+    
+    def testChoice(self, root):
+        lblTitle = Label(self.frame, text="Select Test to Edit", font=("MS", 12, "bold"))
+        lblTitle.grid(row=0, column=0, columnspan=3)
+
+        try:
+            lblSelected = Label(self.frame, text="Test:", font=("MS", 10))
+            lblSelected.grid(row=1, column=0, pady=10)
+
+            selectedTest = StringVar(self.frame)
+            selectedTest.set(self.titleList[0])
+            optTest = OptionMenu(self.frame, selectedTest, *self.titleList)
+            optTest.grid(row = 1, column = 1, sticky = W)
+
+            butSelect = Button(self.frame, text="Select")
+            butSelect["command"]=lambda: self.typeChosen(root, selectedTest)
+            butSelect.grid(row = 4, column = 0, columnspan=3)
+        except IndexError:
+            lblError = Label(self.frame, text="There is no tests in assessments.csv", font=("MS", 10))
+            lblError.grid(row=1, column=0, columnspan=3)
+
+    def typeChosen(self, root, index):
+        index = self.indexDecode(index.get())
+        self.frame.destroy()
+        Assessment(root, self.assessmentList[index:index+6], index)
+
+    def indexDecode(self, index):
+        for i, x in enumerate(self.assessmentList):
+            if index in x:
+                return i
+
+
+
+class modifyTest(Frame):
 
 	def saveTest(self):
 		strMsg = ""
@@ -543,8 +587,8 @@ class createTest(Frame):
 		self.createDueDate()
 
 root = Tk()
-root.title("Create Exam")
+root.title("Modify Exam")
 root.resizable(0,0)
 root.geometry("800x670") 
-app = createTest(root)
+app = ChooseAssessment(root)
 root.mainloop()
