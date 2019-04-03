@@ -9,7 +9,6 @@ class Formative(Frame):
 	def __init__(self, master):
 		Frame.__init__(self, master)
 		self.grid()
-		
 
 class Summative(Frame):
 	# GUI Setup
@@ -109,6 +108,7 @@ class Student(Frame):
 		Frame.__init__(self, master)
 		self.grid()
 		self.createButtons()
+		
 
 	def summativeclick(self):
 		root.destroy()
