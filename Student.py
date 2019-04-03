@@ -114,6 +114,7 @@ class Student(Frame):
 		root.destroy()
 		exec(open(r"Summative.py").read())
 
+
 	def formativeclick(self):
 		root.destroy()
 		exec(open(r"Formative.py").read())
