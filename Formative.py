@@ -2,90 +2,82 @@ from tkinter import *
 import tkinter.messagebox
 import csv 
 
-#change so reads in from a .txt or .csv file,
-#instead of being hard coded in????
-
 Answers=[]
 question = []
-options = [[], [], [], [], [], [], [], [], [], []]
+options = [[], [], [], [], [], [], [], [], [], []] #empty lists to be populated from csv
 
-with open('Formative.csv', 'r') as csv_file:
-    csvquestions = csv.reader(csv_file, delimiter=',')
-    line_count = 0
-    for row in csvquestions:
-        if line_count < 10:
-            question.append(row[0])
-            options[line_count].append(row[1])
+with open('Formative.csv', 'r') as csv_file: #opens test csv as read
+    csvquestions = csv.reader(csv_file, delimiter=',') #seperated by ,
+    line_count = 0 #declares as 0
+    for row in csvquestions:#for each row
+        if line_count < 10:#for line as there are 10
+            question.append(row[0])#question
+            options[line_count].append(row[1])#each option in seperate rows
             options[line_count].append(row[2])
             options[line_count].append(row[3])
             options[line_count].append(row[4])
-            line_count += 1
+            line_count += 1 #line acount appended 
         elif line_count == 10:
             for ans in row:
-                Answers.append(int(ans))
-                print(Answers)
+                Answers.append(int(ans))#answer appended to list from final csv row
             line_count += 1
 
 class Formative:
-    def __init__(self, master):
-        self.questionnumber = 0
+    def __init__(self, master): #all tkinter formatting
+        self.questionnumber = 0 #delcares as 0
         self.selected = IntVar()
         self.right = 0
         self.questions = self.PrintQuestion(master, self.questionnumber) 
          #needs order to print out title, then radios, then buttons and finally result- so dont move
         self.option = self.radios(master,4)
-        button = Button(master, text="Exit", command=self.Exit)
+        button = Button(master, text="Exit", command=self.Exit)#runs exit when quit
         button.pack(side=BOTTOM)#puts at bottom of tkinter window
-        button = Button(master, text="Check Answer", command=self.Check)
+        button = Button(master, text="Check Answer", command=self.Check)#runs check function when quit
         button.pack(side=BOTTOM)
         self.ShowQuestion(self.questionnumber)
-        self.instantresult= Label(master, text='')
-        self.instantresult.pack(side=BOTTOM, fill =X)
+        self.instantresult= Label(master, text='')#text that says if question correct on the window
+        self.instantresult.pack(side=BOTTOM, fill =X)#at bottom
 
     def PrintQuestion(self, master, questionnumber):
         Question = Label(master, text=question[questionnumber])
         Question.pack(side=TOP)
-        return Question
-
+        return Question #current question returned based on question number
 
     def radios(self, master, n):
         answer = 0
         buttons = []
         while answer < n:
-            Buttonn = Radiobutton(master, text="Please choose the right answer", variable=self.selected, value=answer + 1)
-            buttons.append(Buttonn)
+            Buttonn = Radiobutton(master, text="Please choose the answer", variable=self.selected, value=answer + 1)
+            buttons.append(Buttonn) #depending what radio button clicked 
             Buttonn.pack(side=TOP, anchor="w")
-            answer = answer + 1
+            answer = answer + 1 
         return buttons
-
 
     def ShowQuestion(self, questionnumber):
         answer = 0
         self.selected.set(0)
         self.questions['text'] = question[questionnumber]
         for op in options[questionnumber]:
-            self.option[answer]['text'] = op
+            self.option[answer]['text'] = op #used to display question options alongisde radios
             answer = answer + 1
 
-
     def answer(self, questionnumber):
-        if self.selected.get() == Answers[questionnumber]:
+        if self.selected.get() == Answers[questionnumber]: #if the selected button is equal to the answer for that question number
             return True
         return False
 
-
     def Exit(self):
         tkinter.messagebox.showinfo("Exit","Formative test attempt exited. Returning to Main Menu")
-        root.destroy()
+        root.destroy() #closes test
         exec(open(r"Student.py").read()) #return to menu
 
     def Check(self):
         if self.answer(self.questionnumber):
-            self.instantresult['text'] = "You got the correct answer"
+            self.instantresult['text'] = "You got the correct answer" #it true shows message and appends to the right
             self.right += 1
         else:
-            self.instantresult['text'] = "Wrong, go back to the lectures and try again after"
-        self.questionnumber = self.questionnumber + 1
+            self.instantresult['text'] = "Wrong, go back to the lectures and try again after" #if false message and no appened
+        self.questionnumber = self.questionnumber + 1 #append to question number
         if self.questionnumber >= len(question):
             self.FinalResult()#if end of questions
         else:
@@ -93,15 +85,15 @@ class Formative:
 
 
     def FinalResult(self):
-        score = "Score: " + str(self.right) + " out of a total of " + str(len(question))
-        tkinter.messagebox.showinfo("Final Result", score)
-        root.destroy()
-        #show correct answers???       
+        score = "Score: " + str(self.right) + " out of a total of " + str(len(question)) #message with total score - using the right from the Check function and length of all the questions
+        tkinter.messagebox.showinfo("Final Result", score) #prints the message created above
+        root.destroy()#closes window
+        # GET SO SHOWS CORRECT ANSWER IF CLICK FINAL TRY !!!!!!!!!!!!     
         exec(open(r"Student.py").read())#goes back to menu
 
 root = Tk()
-root.title("Java Theory Test")
-root.resizable(0,0) 
+root.title("Formative Test") #title
+root.resizable(0,0) #tkinter formatting from now on
 root.geometry("600x200") 
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)

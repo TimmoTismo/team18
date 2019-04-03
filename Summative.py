@@ -108,6 +108,7 @@ class Summative:
 
         # Comment from Jake: this should only say correct after certain date , and should also actually save the answers somehwere in a text file from current user
         #created a current user .txt file which can be used to define the user and help save this
+        #or else currently the score is not saved and test can be retaken(needs to check this here or at actual menu level removing button)
         score = "Score: " + str(self.right) + " out of  " + str(len(question))
         tkinter.messagebox.showinfo("Final Result", score)
         root.destroy()
