@@ -1,10 +1,10 @@
 currentuser=open("CurrentUser.txt","r")
-User=currentuser.readlines()
+User=currentuser.readlines() #checking current user
 
 from tkinter import *
 import csv
 
-class Results(Frame):
+class Results(Frame): #creating the frame for the results to be shown
 	def __init__(self,master, student_score):
 		Frame.__init__(self,master)
 		self.grid()
@@ -14,7 +14,7 @@ class Results(Frame):
 			Label(self, width="10", height="2").grid(row=0, column=0)
 			Label(self, text="Student Results", font=('Helvetica', 8)).grid(row=2, column=0)
 
-
+			#feedback and results would have been imported from relative csv, then using the currentuser would show only the relevant data here in future version
 root = Tk()
 root.title("Results")
 root.resizable(0,0) 
