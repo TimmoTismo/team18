@@ -84,7 +84,7 @@ class Student(Frame):
 		self.listProg.selection_set(END)  
 
 	def createButtons(self):
-
+		
 		"""
 		butAssessment = Button(self, text='Assessment',font=('Helvetica', 8))
 		butAssessment['command']=self.takeAssessment #Note: no () after the method
