@@ -79,6 +79,9 @@ class createTest(Frame):
 			tkMessageBox.showwarning("Entry Error", strMsg)
 
 	def goBack(self):
+		root.destroy()
+		tkMessageBox.showerror("Cancel","Creating Assement Cancelled")
+		exec(open(r"Lecturer.py").read())
 		pass
 
 	def createEntries(self):
