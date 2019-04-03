@@ -3,11 +3,6 @@ import tkinter.messagebox as tkMessageBox
 import csv
 import datetime
 
-
-currentuser=open("CurrentUser.txt","r")
-User=currentuser.readlines()
-
-
 class createTest(Frame):
 
 	def saveTest(self):
