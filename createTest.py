@@ -3,7 +3,6 @@ import tkinter.messagebox as tkMessageBox
 import csv
 import datetime
 
-
 class createTest(Frame):
 
 	def saveTest(self):
@@ -75,6 +74,9 @@ class createTest(Frame):
 			tkMessageBox.showwarning("Entry Error", strMsg)
 
 	def goBack(self):
+		root.destroy()
+		tkMessageBox.showerror("Cancel","Creating Assement Cancelled")
+		exec(open(r"Lecturer.py").read())
 		pass
 
 	def createEntries(self):

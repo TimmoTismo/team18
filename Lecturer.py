@@ -40,8 +40,8 @@ class Assessment(Frame):
 		butEditQ['command']=self.EditQ #Note: no () after the method
 		butEditQ.grid(row=14, column=2, columnspan=2, padx=10, pady=10)
 
-		butAddQ = Button(self, text='Add Question',font=('Helvetica', 8))
-		butAddQ['command']=self.AddQ #Note: no () after the method
+		butAddQ = Button(self, text='Create Assessment',font=('Helvetica', 8))
+		butAddQ['command']=self.AddClicked
 		butAddQ.grid(row=12, column=2, columnspan=2, padx=10, pady=10)
 
 
@@ -57,6 +57,9 @@ class Lecturer(Frame):
 	def AddQ(self):
 		t1 = Toplevel(root)
 		AddQ(t1)
+
+	def AddClicked(self):
+		exec(open(r"createTest.py").read())
 
 	def EditQ(self):
 		
@@ -88,14 +91,14 @@ class Lecturer(Frame):
 		butEditQ['command']=self.EditQ #Note: no () after the method
 		butEditQ.grid(row=12, column=2, columnspan=2, padx=10, pady=10)
 
-		butAddQ = Button(self, text='Add Question',font=('Helvetica', 8))
-		butAddQ['command']=self.AddQ #Note: no () after the method
+		butAddQ = Button(self, text='Create Assessment',font=('Helvetica', 8))
+		butAddQ['command']=self.AddClicked #Note: no () after the method
 		butAddQ.grid(row=10, column=2, columnspan=2, padx=10, pady=10)
 
 		butviewStatistics = Button(self, text='View Statistics',font=('Helvetica', 8))
 		#butviewStatistics['command']=exec(open(r"Lecturer.py").read()
 		butviewStatistics.grid(row=14, column=2, columnspan=2, padx=10, pady=10)  
-		
+
 	# GUI Setup
 	def __init__(self, master):
 		# Initialise Lecturer Class
