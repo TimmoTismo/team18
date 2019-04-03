@@ -59,6 +59,7 @@ class Lecturer(Frame):
 		AddQ(t1)
 
 	def AddClicked(self):
+		root.destroy()
 		exec(open(r"createTest.py").read())
 
 	def EditQ(self):
